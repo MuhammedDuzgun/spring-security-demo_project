@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
-    private UsersService usersService;
+    private final UsersService usersService;
 
     public UserController(UsersService usersService) {
         this.usersService = usersService;
@@ -20,6 +20,12 @@ public class UserController {
     @PostMapping("/register")
     public Users register(@RequestBody Users user) {
         return usersService.register(user);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody Users user) {
+        System.out.println(user);
+        return usersService.verify(user);
     }
 
 }
